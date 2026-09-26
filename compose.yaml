@@ -1,0 +1,48 @@
+services:
+  solarwinds-mcp:
+    image: solarwinds-readonly-mcp:0.1.0
+    build:
+      context: .
+    stdin_open: true
+    env_file:
+      - path: .env
+        required: true
+    volumes:
+      - ./secrets:/run/secrets:ro
+    restart: "no"
+    read_only: true
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    tmpfs:
+      - /tmp:size=16m,mode=1777
+
+  solarwinds-openapi:
+    image: solarwinds-readonly-openapi:0.1.0
+    build:
+      context: .
+      dockerfile: Dockerfile.openapi
+    command:
+      - --port
+      - "8000"
+      - --api-key
+      - ${MCPO_API_KEY:?Set MCPO_API_KEY in .env}
+      - --
+      - node
+      - build/index.js
+    env_file:
+      - path: .env
+        required: true
+    volumes:
+      - ./secrets:/run/secrets:ro
+    expose:
+      - "8000"
+    restart: unless-stopped
+    read_only: true
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    tmpfs:
+      - /tmp:size=32m,mode=1777

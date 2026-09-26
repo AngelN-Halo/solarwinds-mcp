@@ -1,0 +1,20 @@
+.git
+.env
+node_modules
+build
+*.pfx
+*.p12
+*.key
+*.pem
+*.crt
+
+# Keep local deployment data out of the Docker build context
+.env
+.env.*
+!.env.example
+!.env.upstream.example
+secrets/
+certs/*
+!certs/.gitkeep
+backup-*/
+*.log
