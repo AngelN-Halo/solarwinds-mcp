@@ -14,15 +14,15 @@
     "test": "npm run build && node --test build/*.test.js"
   },
   "dependencies": {
-    "@modelcontextprotocol/server": "2.0.0",
-    "zod": "^4.1.12"
+    "@modelcontextprotocol/server": "2.4.0",
+    "zod": "^4.6.7"
   },
   "devDependencies": {
-    "@types/node": "^24.10.1",
+    "@types/node": "^24.19.2",
     "typescript": "^5.9.3"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=24"
   },
   "packageManager": "pnpm@11.9.0"
 }

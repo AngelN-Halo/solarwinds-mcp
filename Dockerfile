@@ -1,4 +1,4 @@
-FROM node:24.5.0-alpine AS build
+FROM node:24-alpine AS build
 
 WORKDIR /app
 RUN corepack enable
@@ -10,7 +10,7 @@ COPY src ./src
 RUN npm run build
 RUN pnpm prune --prod
 
-FROM node:24.5.0-alpine
+FROM node:24-alpine
 
 ENV NODE_ENV=production
 WORKDIR /app
